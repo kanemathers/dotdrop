@@ -1,0 +1,2 @@
+plugins.d/*
+!plugins.d/dotdrop

@@ -1,0 +1,6 @@
+# This is an example dotfile to demonstrate how dotdrop works.
+#
+# When dotdrop runs, a symbolic link will created at ~/.dotdrop_example for
+# this path.
+#
+# See README.md for more information

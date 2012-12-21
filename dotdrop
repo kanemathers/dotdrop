@@ -1,0 +1,39 @@
+#!/bin/bash
+
+HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
+HISTORY=~/.dotdrop_history
+
+create_link()
+{
+    local file=$1
+    local link_path=$HOME/.$(basename $file)
+
+    if [ -e $link_path ]; then
+        return
+    fi
+
+    ln -s $file $link_path
+
+    echo $link_path >> $HISTORY
+}
+
+remove_links()
+{
+    local link
+
+    if [ ! -f $HISTORY ]; then
+        return
+    fi
+
+    for link in $(cat $HISTORY); do
+        rm $link
+    done
+
+    echo -n "" > $HISTORY
+}
+
+remove_links
+
+for plugin in "$HERE"/plugins.d/*/*; do
+    create_link "$plugin"
+done
