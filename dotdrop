@@ -6,8 +6,11 @@ HISTORY=~/.dotdrop_history
 create_link()
 {
     local file=$1
-    local link_path=$HOME/.$(basename $file)
+    local link_path="$HOME/.$(basename $file)"
 
+    # This assumes `remove_links` was called before `create_link`. As such,
+    # `$link_path` shouldn't exist. If it does, it's not our link so we're
+    # not going to touch it.
     if [ -e $link_path ]; then
         return
     fi
