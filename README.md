@@ -35,5 +35,5 @@ Usage
 3. dotdrop should be run on startup to ensure your local symlinks keep in
 sync with your plugins:
 
-    $ echo "source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+    $ echo "[[ -f ~/Dropbox/dotdrop/dotdrop ]] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
 
