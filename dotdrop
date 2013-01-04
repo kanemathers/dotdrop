@@ -17,6 +17,26 @@
 
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
 DOTDROP_SLEEP=${DOTDROP_SLEEP:-10}
+DOTDROP_NOTIFY=${DOTDROP_NOTIFY:-"no"}
+
+dotdrop_notify()
+{
+    local message=$1
+
+    if [ "$DOTDROP_NOTIFY" != "yes" ]; then
+        return 0
+    fi
+
+    if [ -z "$message" ]; then
+        return 1
+    fi
+
+    command -v notify-send >/dev/null 2>&1 || return 1
+
+    notify-send "$message"
+
+    return $?
+}
 
 dotdrop_sync()
 {
@@ -29,6 +49,8 @@ dotdrop_sync()
     for plugin in "$HERE"/plugins.d/*/*; do
         create_link "$plugin"
     done
+
+    dotdrop_notify "dotdrop: finished syncing"
 }
 
 (dotdrop_sync &)
