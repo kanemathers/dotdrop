@@ -1,42 +1,34 @@
 #!/bin/bash
+# dotdrop
+# =======
+#
+# Keep your dotfiles nsync with the dropbox as the backup dancer.
+# https://github.com/kanemathers/dotdrop
+#
+# How to Install
+# --------------
+#
+# Source this file in ~/.bash_profile::
+#
+#     $ echo "[ -f ~/Dropbox/dotdrop/dotdrop ] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+#
+
+[ -f ~/Dropbox/dotdrop/sync ] && . ~/Dropbox/dotdrop/sync
 
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
-HISTORY=~/.dotdrop_history
+DOTDROP_SLEEP=${DOTDROP_SLEEP:-10}
 
-create_link()
+dotdrop_sync()
 {
-    local file=$1
-    local link_path="$HOME/.$(basename $file)"
+    remove_links
 
-    # This assumes `remove_links` was called before `create_link`. As such,
-    # `$link_path` shouldn't exist. If it does, it's not our link so we're
-    # not going to touch it.
-    if [ -e $link_path ]; then
-        return
-    fi
+    # Sleep long enough for an internet connection to be established and,
+    # hopefully, long enough for dropbox to sync the plugins.
+    sleep $DOTDROP_SLEEP
 
-    ln -s $file $link_path
-
-    echo $link_path >> $HISTORY
-}
-
-remove_links()
-{
-    local link
-
-    if [ ! -f $HISTORY ]; then
-        return
-    fi
-
-    for link in $(cat $HISTORY); do
-        rm $link
+    for plugin in "$HERE"/plugins.d/*/*; do
+        create_link "$plugin"
     done
-
-    echo -n "" > $HISTORY
 }
 
-remove_links
-
-for plugin in "$HERE"/plugins.d/*/*; do
-    create_link "$plugin"
-done
+(dotdrop_sync &)
