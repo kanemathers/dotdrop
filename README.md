@@ -26,16 +26,16 @@ Usage
 
 1. Clone dotdrop into your Dropbox folder:
 
-    $ git clone https://github.com/kanemathers/dotdrop.git ~/Dropbox
+        $ git clone https://github.com/kanemathers/dotdrop.git ~/Dropbox
 
 2. Run dotdrop:
 
-    $ ~/Dropbox/dotdrop/dotdrop
+        $ ~/Dropbox/dotdrop/dotdrop
 
 3. dotdrop should be run on startup to ensure your local symlinks keep in
    sync with your plugins:
 
-    $ echo "[ -f ~/Dropbox/dotdrop/dotdrop ] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+        $ echo "[ -f ~/Dropbox/dotdrop/dotdrop ] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
 
 Configuration
 -------------
@@ -43,4 +43,5 @@ Configuration
 Environment variables are used to configure dotdrop.
 
 `DOTDROP_SLEEP` - default: "10" - How long to sleep before syncing plugins.
+
 `DOTDROP_NOFIFY` - default: "no" - Enable notifications.
