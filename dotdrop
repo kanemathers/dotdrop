@@ -10,10 +10,10 @@
 #
 # Source this file in ~/.bash_profile::
 #
-#     $ echo "[ -f ~/Dropbox/dotdrop/dotdrop ] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+#     $ echo "[[ -f ~/Dropbox/dotdrop/dotdrop ]] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
 #
 
-[ -f ~/Dropbox/dotdrop/sync ] && . ~/Dropbox/dotdrop/sync
+[[ -f ~/Dropbox/dotdrop/sync ]] && . ~/Dropbox/dotdrop/sync
 
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
 DOTDROP_SLEEP=${DOTDROP_SLEEP:-10}
@@ -23,11 +23,11 @@ dotdrop_notify()
 {
     local message=$1
 
-    if [ "$DOTDROP_NOTIFY" != "yes" ]; then
+    if [[ "$DOTDROP_NOTIFY" != "yes" ]]; then
         return 0
     fi
 
-    if [ -z "$message" ]; then
+    if [[ -z "$message" ]]; then
         return 1
     fi
 
