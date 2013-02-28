@@ -40,11 +40,11 @@ dotdrop_notify()
 
 dotdrop_sync()
 {
-    remove_links
-
     # Sleep long enough for an internet connection to be established and,
     # hopefully, long enough for dropbox to sync the plugins.
     sleep $DOTDROP_SLEEP
+
+    remove_links
 
     for plugin in "$HERE"/plugins.d/*/*; do
         create_link "$plugin"
