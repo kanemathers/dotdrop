@@ -2,7 +2,7 @@
 # dotdrop
 # =======
 #
-# Keep your dotfiles nsync with the dropbox as the backup dancer.
+# Easily sync dotfiles between computers
 # https://github.com/kanemathers/dotdrop
 #
 # How to Install
@@ -10,22 +10,19 @@
 #
 # Source this file in ~/.bash_profile::
 #
-#     $ echo "[[ -f ~/Dropbox/dotdrop/dotdrop ]] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+#     $ echo "[[ -f ~/dotdrop/dotdrop ]] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
 #
 
-[[ -f ~/Dropbox/dotdrop/sync ]] && . ~/Dropbox/dotdrop/sync
-
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
+
+. "${HERE}/sync"
+
 DOTDROP_SLEEP=${DOTDROP_SLEEP:-10}
 DOTDROP_NOTIFY=${DOTDROP_NOTIFY:-"no"}
 
-dotdrop_notify()
+notify()
 {
     local message=$1
-
-    if [[ "$DOTDROP_NOTIFY" != "yes" ]]; then
-        return 0
-    fi
 
     if [[ -z "$message" ]]; then
         return 1
@@ -50,7 +47,9 @@ dotdrop_sync()
         create_link "$plugin"
     done
 
-    dotdrop_notify "dotdrop: finished syncing"
+    if [[ "$DOTDROP_NOTIFY" == "yes" ]]; then
+        notify "dotdrop: finished syncing"
+    fi
 }
 
 (dotdrop_sync &)

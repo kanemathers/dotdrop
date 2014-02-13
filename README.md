@@ -1,7 +1,7 @@
 dotdrop
 =======
 
-Keep your dotfiles nsync with the dropbox as the backup dancer.
+Easily sync dotfiles between computers
 
 Plugins
 -------
@@ -18,24 +18,28 @@ For example:
 When dotdrop runs, those files will be symlinked to $HOME:
 
     $ ls -la ~/.vim*
-    .vim -> /home/kane/Dropbox/dotdrop/plugins.d/vim/vim
-    .vimrc -> /home/kane/Dropbox/dotdrop/plugins.d/vim/vimrc
+    .vim -> /home/kane/dotdrop/plugins.d/vim/vim
+    .vimrc -> /home/kane/dotdrop/plugins.d/vim/vimrc
 
 Usage
 -----
 
-1. Clone dotdrop into your Dropbox folder:
+1. Clone dotdrop into a folder you have synchronized between devices. This
+   could be your Dropbox folder, BTSync folder, etc.
 
-        $ git clone https://github.com/kanemathers/dotdrop.git ~/Dropbox
+        $ git clone https://github.com/kanemathers/dotdrop.git ~/
 
 2. Run dotdrop:
 
-        $ ~/Dropbox/dotdrop/dotdrop
+        $ ~/dotdrop/dotdrop
 
 3. dotdrop should be run on startup to ensure your local symlinks keep in
    sync with your plugins:
 
-        $ echo "[[ -f ~/Dropbox/dotdrop/dotdrop ]] && source ~/Dropbox/dotdrop/dotdrop" >> ~/.bash_profile
+        $ echo "[[ -f ~/dotdrop/dotdrop ]] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
+
+    Substitute ``~/dotdrop`` for your actual path. In this example,
+    ``~/dotdrop`` is shared between computers via BTSync.
 
 Configuration
 -------------
