@@ -17,7 +17,6 @@ HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
 
 . "${HERE}/sync"
 
-DOTDROP_SLEEP=${DOTDROP_SLEEP:-10}
 DOTDROP_NOTIFY=${DOTDROP_NOTIFY:-"no"}
 
 notify()
@@ -35,11 +34,16 @@ notify()
     return $?
 }
 
+check_connection()
+{
+    ping -c 1 google.com >/dev/null 2>&1
+}
+
 dotdrop_sync()
 {
-    # Sleep long enough for an internet connection to be established and,
-    # hopefully, long enough for dropbox to sync the plugins.
-    sleep $DOTDROP_SLEEP
+    until check_connection; do
+        sleep 5
+    done
 
     remove_links
 

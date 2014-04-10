@@ -46,6 +46,4 @@ Configuration
 
 Environment variables are used to configure dotdrop.
 
-`DOTDROP_SLEEP` - default: "10" - How long to sleep before syncing plugins.
-
 `DOTDROP_NOFIFY` - default: "no" - Enable notifications.
