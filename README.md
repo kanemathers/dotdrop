@@ -36,7 +36,7 @@ Usage
 3. dotdrop should be run on startup to ensure your local symlinks keep in
    sync with your plugins:
 
-        $ echo "[[ -f ~/dotdrop/dotdrop ]] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
+        $ echo "[ -f ~/dotdrop/dotdrop ] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
 
     Substitute ``~/dotdrop`` for your actual path. In this example,
     ``~/dotdrop`` is shared between computers via BTSync.

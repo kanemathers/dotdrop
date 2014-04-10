@@ -10,7 +10,7 @@ create_link()
     # This assumes `remove_links` was called before `create_link`. As such,
     # `$link_path` shouldn't exist. If it does, it's not our link so we're
     # not going to touch it.
-    if [[ -e $link_path ]]; then
+    if [ -e $link_path ]; then
         return 1
     fi
 
@@ -23,7 +23,7 @@ remove_links()
 {
     local link
 
-    if [[ ! -f $HISTORY ]]; then
+    if [ ! -f $HISTORY ]; then
         return
     fi
 

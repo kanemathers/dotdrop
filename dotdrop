@@ -10,7 +10,7 @@
 #
 # Source this file in ~/.bash_profile::
 #
-#     $ echo "[[ -f ~/dotdrop/dotdrop ]] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
+#     $ echo "[ -f ~/dotdrop/dotdrop ] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
 #
 
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
@@ -24,7 +24,7 @@ notify()
 {
     local message=$1
 
-    if [[ -z "$message" ]]; then
+    if [ -z "$message" ]; then
         return 1
     fi
 
@@ -47,7 +47,7 @@ dotdrop_sync()
         create_link "$plugin"
     done
 
-    if [[ "$DOTDROP_NOTIFY" == "yes" ]]; then
+    if [ "$DOTDROP_NOTIFY" == "yes" ]; then
         notify "dotdrop: finished syncing"
     fi
 }
