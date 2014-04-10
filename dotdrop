@@ -1,17 +1,4 @@
 #!/bin/bash
-# dotdrop
-# =======
-#
-# Easily sync dotfiles between computers
-# https://github.com/kanemathers/dotdrop
-#
-# How to Install
-# --------------
-#
-# Source this file in ~/.bash_profile::
-#
-#     $ echo "[ -f ~/dotdrop/dotdrop ] && . ~/dotdrop/dotdrop" >> ~/.bash_profile
-#
 
 HERE=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)
 
