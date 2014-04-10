@@ -2,23 +2,6 @@
 
 HISTORY=~/.dotdrop_history
 
-create_link()
-{
-    local file=$1
-    local link_path="$HOME/.$(basename $file)"
-
-    # This assumes `remove_links` was called before `create_link`. As such,
-    # `$link_path` shouldn't exist. If it does, it's not our link so we're
-    # not going to touch it.
-    if [ -e $link_path ]; then
-        return 1
-    fi
-
-    ln -s $file $link_path || return 1;
-
-    echo $link_path >> $HISTORY
-}
-
 remove_links()
 {
     local link
@@ -28,8 +11,26 @@ remove_links()
     fi
 
     for link in $(cat $HISTORY); do
-        rm $link
+        if [ ! -L "$link" ]; then
+            continue
+        fi
+
+        rm "$link"
+
+        grep -v "$link" $HISTORY > "${HISTORY}.new" \
+            && mv "${HISTORY}.new" $HISTORY
     done
 
-    echo -n "" > $HISTORY
+    # XXX: why is this lingering?
+    rm "${HISTORY}.new"
+}
+
+create_link()
+{
+    local file=$1
+    local link_path="$HOME/.$(basename $file)"
+
+    ln -s "$file" "$link_path" 2>/dev/null || return 1;
+
+    echo "$link_path" >> $HISTORY
 }
